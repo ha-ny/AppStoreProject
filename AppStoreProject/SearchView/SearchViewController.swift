@@ -9,9 +9,15 @@ import UIKit
 
 class SearchViewController: UIViewController {
 
+    let mainView = SearchView()
+    
+    override func loadView() {
+        self.view = mainView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        navigationItem.searchController = mainView.searchBar
     }
 
 
