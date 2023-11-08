@@ -7,14 +7,18 @@
 
 import UIKit
 
-class SearchView: UIView {
+class SearchView: BaseView {
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    let searchBar = UISearchController()
+    let tableView = UITableView()
+    
+    override func setConstraints() {
+        addSubview(tableView)
     }
-    */
-
+    
+    override func setConfiguration() {
+        tableView.snp.makeConstraints { make in
+            make.edges.equalTo(self)
+        }
+    }
 }
