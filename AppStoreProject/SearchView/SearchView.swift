@@ -9,16 +9,22 @@ import UIKit
 
 class SearchView: BaseView {
 
-    let searchBar = UISearchController()
-    let tableView = UITableView()
+    let searchBar = {
+        let view = UISearchController()
+        view.searchBar.placeholder = "게임, 앱, 스토리 등"
+        view.searchBar.setValue("취소", forKey: "cancelButtonText")
+        return view
+    }()
+    
+    //let tableView = UITableView()
     
     override func setConstraints() {
-        addSubview(tableView)
+        //addSubview(tableView)
     }
     
     override func setConfiguration() {
-        tableView.snp.makeConstraints { make in
-            make.edges.equalTo(self)
-        }
+//        tableView.snp.makeConstraints { make in
+//            make.edges.equalTo(self)
+//        }
     }
 }
