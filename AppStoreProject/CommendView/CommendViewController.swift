@@ -1,5 +1,5 @@
 //
-//  SearchViewController.swift
+//  CommendViewController.swift
 //  AppStoreProject
 //
 //  Created by 김하은 on 2023/11/08.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SearchViewController: UIViewController {
+class CommendViewController: UIViewController {
 
     let mainView = SearchView()
     let apiManager = APIManager.shared
@@ -37,13 +37,13 @@ class SearchViewController: UIViewController {
     }
     
     func dataSetting() {
-        apiManager.requestAPI(keyWord: "추천앱", completion: { data in
+        apiManager.requestAPI(keyWord: "추천앱", limit: 12, completion: { data in
             self.data = data
         })
     }
 }
 
-extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
+extension CommendViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return data?.resultCount ?? 0
     }
@@ -70,6 +70,11 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         cell.descriptionLabel.text = result.sellerName
         cell.downLoadButton.tag = indexPath.row
         cell.selectionStyle = .none
+        
+        if indexPath.row + 1 == data.resultCount {
+            cell.lineView.isHidden = true
+        }
+        
         return cell
     }
     

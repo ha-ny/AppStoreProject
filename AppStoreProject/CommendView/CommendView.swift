@@ -1,5 +1,5 @@
 //
-//  SearchView.swift
+//  CommendView.swift
 //  AppStoreProject
 //
 //  Created by 김하은 on 2023/11/08.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SearchView: BaseView {
+class CommendView: BaseView {
 
     let searchBar = {
         let view = UISearchController()

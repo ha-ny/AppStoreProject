@@ -13,9 +13,9 @@ class APIManager {
     
     private init() { }
     
-    func requestAPI(keyWord: String, completion: @escaping (SearchApp?) -> ()){
+    func requestAPI(keyWord: String, limit: Int, completion: @escaping (SearchApp?) -> ()){
         let term =  keyWord.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-        let urlStr = "https://itunes.apple.com/search?term=\(term)&contry=KR&media=software&lang=ko&limit=15"
+        let urlStr = "https://itunes.apple.com/search?term=\(term)&contry=KR&media=software&lang=ko&limit=\(limit)"
         guard let url = URL(string: urlStr) else { return completion(nil) }
  
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { (data, response, error) in
