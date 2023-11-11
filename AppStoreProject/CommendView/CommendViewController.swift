@@ -7,11 +7,20 @@
 
 import UIKit
 
-class CommendViewController: UIViewController {
+final class CommendViewController: UIViewController {
 
-    let mainView = SearchView()
-    let apiManager = APIManager.shared
-    var data: SearchApp? {
+    let vc = SearchViewController()
+    
+    lazy var searchController = {
+        let view = UISearchController(searchResultsController: vc)
+        view.searchBar.placeholder = "게임, 앱, 스토리 등"
+        view.searchBar.setValue("취소", forKey: "cancelButtonText")
+        return view
+    }()
+    
+    private let mainView = CommendView()
+    private let apiManager = APIManager.shared
+    private var data: SearchApp? {
         didSet {
             mainView.commendTableView.reloadData()
         }
@@ -20,23 +29,27 @@ class CommendViewController: UIViewController {
     override func loadView() {
         self.view = mainView
     }
-    
+     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         navigationItem.title = "검색"
-        navigationItem.searchController = mainView.searchBar
+        searchController.searchBar.delegate = self
+        navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         navigationController?.navigationBar.prefersLargeTitles = true
 
+        mainView.foundCollectionView.delegate = self
+        mainView.foundCollectionView.dataSource = self
         mainView.commendTableView.delegate = self
         mainView.commendTableView.dataSource = self
-        mainView.commendTableView.register(CommendTableViewCell.self, forCellReuseIdentifier: "CommendTableViewCell")
+        mainView.commendTableView.register(CommendTableViewCell.self, forCellReuseIdentifier: CommendTableViewCell.identifier )
+        mainView.commendTableView.rowHeight = 70
         dataSetting()
        
     }
     
-    func dataSetting() {
+    private func dataSetting() {
         apiManager.requestAPI(keyWord: "추천앱", limit: 12, completion: { data in
             self.data = data
         })
@@ -49,29 +62,22 @@ extension CommendViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let data, let cell = mainView.commendTableView.dequeueReusableCell(withIdentifier: "CommendTableViewCell", for: indexPath) as? CommendTableViewCell else { return UITableViewCell() }
+        guard let data, let cell = mainView.commendTableView.dequeueReusableCell(withIdentifier: CommendTableViewCell.identifier, for: indexPath) as? CommendTableViewCell else { return UITableViewCell() }
 
         let result = data.results[indexPath.row]
         cell.cellSetting()
-        
-        if let url = URL(string: result.artworkUrl512) {
-            DispatchQueue.global().async {
-                if let data = try? Data(contentsOf: url) {
-                    if let image = UIImage(data: data) {
-                        DispatchQueue.main.async {
-                            cell.appImage.image = image
-                        }
-                    }
-                }
+
+        UIImage().stringURLConversion(stringURL: result.artworkUrl512) { image in
+            DispatchQueue.main.async {
+                cell.appImage.image = image
             }
         }
         
         cell.titleLabel.text = result.trackName
-        cell.descriptionLabel.text = result.sellerName
-        cell.downLoadButton.tag = indexPath.row
+        cell.descriptionLabel.text = result.description
         cell.selectionStyle = .none
-        
-        if indexPath.row + 1 == data.resultCount {
+
+        if indexPath.row + 1 == data.resultCount{
             cell.lineView.isHidden = true
         }
         
@@ -80,5 +86,40 @@ extension CommendViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return mainView.commendTableHeaderView
-       }
+   }
+}
+
+extension CommendViewController: UISearchBarDelegate {
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        vc.dataSetting(text: "")
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let text = searchBar.text else { return }
+        vc.dataSetting(text: text)
+    }
+}
+
+extension CommendViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return mainView.data.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        print("--------------------------------")
+        guard let cell =  collectionView.dequeueReusableCell(withReuseIdentifier: FoundCollectionViewCell.identifier, for: indexPath) as? FoundCollectionViewCell else { return UICollectionViewCell() }
+        cell.cellSetting()
+        cell.dataLabel.text = mainView.data[indexPath.item]
+        print(mainView.data[indexPath.item])
+        if indexPath.row == 2 {
+            cell.line.isHidden = true
+        }
+        
+        return cell
+    }
 }

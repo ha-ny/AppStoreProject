@@ -8,13 +8,15 @@
 import UIKit
 import SnapKit
 
-class CommendTableViewCell: UITableViewCell {
+final class CommendTableViewCell: UITableViewCell {
 
     var appImage = {
         let view = UIImageView()
         view.contentMode = .scaleAspectFill
         view.layer.cornerRadius = 10
         view.clipsToBounds = true
+        view.layer.borderColor = UIColor.systemGray5.cgColor
+        view.layer.borderWidth = 0.8
         return view
     }()
     
@@ -42,7 +44,7 @@ class CommendTableViewCell: UITableViewCell {
         view.titleLabel?.font =  .boldSystemFont(ofSize: 15)
         return view
     }()
-        
+    
     var lineView = {
         let view = UILabel()
         view.backgroundColor = .systemGray4
