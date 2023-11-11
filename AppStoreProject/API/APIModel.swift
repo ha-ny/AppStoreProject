@@ -19,12 +19,10 @@ struct Appdata: Codable {
     let description: String //설명
     let genres: [String] //장르
     let trackContentRating: String //연령
-    let price: Double // 가격
     let sellerName: String // 개발자 이름
     let userRatingCount: Int // 평가자 수
     let averageUserRating: Double // 평균 평점
     let artworkUrl512: String // 아이콘
     let languageCodesISO2A: [String] // 언어
     let releaseNotes: String //앱 설명
-    let primaryGenreName: String
 }
