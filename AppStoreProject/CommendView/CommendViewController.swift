@@ -8,11 +8,9 @@
 import UIKit
 
 final class CommendViewController: UIViewController {
-
-    let vc = SearchViewController()
     
     lazy var searchController = {
-        let view = UISearchController(searchResultsController: vc)
+        let view = UISearchController()
         view.searchBar.placeholder = "게임, 앱, 스토리 등"
         view.searchBar.setValue("취소", forKey: "cancelButtonText")
         return view
@@ -27,6 +25,7 @@ final class CommendViewController: UIViewController {
     }
     
     override func loadView() {
+        super.loadView()
         self.view = mainView
     }
      
@@ -39,8 +38,6 @@ final class CommendViewController: UIViewController {
         navigationItem.hidesSearchBarWhenScrolling = false
         navigationController?.navigationBar.prefersLargeTitles = true
 
-        mainView.foundCollectionView.delegate = self
-        mainView.foundCollectionView.dataSource = self
         mainView.commendTableView.delegate = self
         mainView.commendTableView.dataSource = self
         mainView.commendTableView.register(CommendTableViewCell.self, forCellReuseIdentifier: CommendTableViewCell.identifier )
@@ -57,16 +54,36 @@ final class CommendViewController: UIViewController {
 }
 
 extension CommendViewController: UITableViewDelegate, UITableViewDataSource {
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let sectionHeaderHeight:CGFloat = 30
+        tableView.sectionHeaderHeight = sectionHeaderHeight
+        
+        let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: sectionHeaderHeight))
+        headerView.backgroundColor = .white
+
+        let sectionLabel = UILabel()
+        sectionLabel.frame = CGRect.init(x: 16, y: 0, width: headerView.frame.width, height: sectionHeaderHeight)
+        sectionLabel.font = .boldSystemFont(ofSize: 20)
+        sectionLabel.textColor = .black
+
+        sectionLabel.text = "추천 앱과 게임"
+
+        headerView.addSubview(sectionLabel)
+        return headerView
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return data?.resultCount ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         guard let data, let cell = mainView.commendTableView.dequeueReusableCell(withIdentifier: CommendTableViewCell.identifier, for: indexPath) as? CommendTableViewCell else { return UITableViewCell() }
-
+        
         let result = data.results[indexPath.row]
         cell.cellSetting()
-
+        
         UIImage().stringURLConversion(stringURL: result.artworkUrl512) { image in
             DispatchQueue.main.async {
                 cell.appImage.image = image
@@ -76,7 +93,7 @@ extension CommendViewController: UITableViewDelegate, UITableViewDataSource {
         cell.titleLabel.text = result.trackName
         cell.descriptionLabel.text = result.description
         cell.selectionStyle = .none
-
+        
         if indexPath.row + 1 == data.resultCount{
             cell.lineView.isHidden = true
         }
@@ -84,42 +101,20 @@ extension CommendViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return mainView.commendTableHeaderView
-   }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let data else { return }
+        let vc = DetailViewController(trackId: data.results[indexPath.item].trackId)
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 extension CommendViewController: UISearchBarDelegate {
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        vc.dataSetting(text: "")
-    }
-    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let text = searchBar.text else { return }
-        vc.dataSetting(text: text)
-    }
-}
-
-extension CommendViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return mainView.data.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        print("--------------------------------")
-        guard let cell =  collectionView.dequeueReusableCell(withReuseIdentifier: FoundCollectionViewCell.identifier, for: indexPath) as? FoundCollectionViewCell else { return UICollectionViewCell() }
-        cell.cellSetting()
-        cell.dataLabel.text = mainView.data[indexPath.item]
-        print(mainView.data[indexPath.item])
-        if indexPath.row == 2 {
-            cell.line.isHidden = true
-        }
         
-        return cell
+        let vc = UINavigationController(rootViewController: SearchViewController(text: text)) 
+        vc.modalPresentationStyle = .overFullScreen
+        present(vc, animated: false)
+        searchController.isActive = false
     }
 }
