@@ -128,6 +128,7 @@ class DetailView: BaseView {
     var addVersionLabel = {
         let view = UILabel()
         view.font = .systemFont(ofSize: 13)
+        view.numberOfLines = 0
         return view
     }()
     

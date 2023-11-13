@@ -22,23 +22,10 @@ final class APIManager {
             switch request.result {
             case .success(let value):
                 completion(value)
-            case .failure(let error):
-                print(error)
+            case .failure(_):
+                completion(nil)
             }
         }
-        
-//        guard let url = URL(string: stringURL) else { return completion(nil) }
-//
-//        let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { (data, response, error) in
-//            guard let data else { return completion(nil) }
-//            if let error { return completion(nil) }
-//
-//            do {
-//                let resultData = try JSONDecoder().decode(SearchApp.self, from: data)
-//                completion(resultData)
-//            } catch { }
-//        }
-//        task.resume()
     }
 
 }

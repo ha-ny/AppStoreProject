@@ -11,11 +11,7 @@ class DetailViewController: UIViewController {
 
     private let mainView = DetailView()
     private let apiManager = APIManager.shared
-    private var data: SearchApp? {
-        didSet {
-            viewSetting()
-        }
-    }
+    private var data: SearchApp?
     
     init(trackId: Int) {
         super.init(nibName: nil, bundle: nil)
@@ -51,6 +47,7 @@ class DetailViewController: UIViewController {
     func dataSetting(text: String) {
         apiManager.requestAPI(keyWord: text, limit: 1, completion: { data in
             self.data = data
+            self.viewSetting()
         })
     }
     

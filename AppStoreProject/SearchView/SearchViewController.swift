@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 
 final class SearchViewController: UIViewController {
 
@@ -19,11 +20,15 @@ final class SearchViewController: UIViewController {
     
     private let mainView = CommendView()
     private let apiManager = APIManager.shared
+    private var rxData: BehaviorSubject<SearchApp>?
+    
     private var data: SearchApp? {
         didSet {
             mainView.commendTableView.reloadData()
         }
     }
+    
+    let disposeBag = DisposeBag()
 
     init(text: String) {
         super.init(nibName: nil, bundle: nil)
@@ -51,17 +56,22 @@ final class SearchViewController: UIViewController {
         mainView.commendTableView.dataSource = self
         mainView.commendTableView.register(SearchTableViewCell.self, forCellReuseIdentifier: SearchTableViewCell.identifier)
         mainView.commendTableView.rowHeight = 330
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        searchController.searchBar.becomeFirstResponder()
+        
+        bind()
     }
 
+    func bind() {
+        guard let rxData else { return }
+        
+        rxData.subscribe(with: self) { owner, value in
+            owner.data = value
+        }.disposed(by: disposeBag)
+     }
     
     func dataSetting(text: String) {
         apiManager.requestAPI(keyWord: text, limit: 25, completion: { data in
-            self.data = data
+            guard let data, let rxData = self.rxData else { return }
+            rxData.onNext(data)
         })
     }
 }

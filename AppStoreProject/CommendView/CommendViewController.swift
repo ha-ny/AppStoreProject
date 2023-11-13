@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 
 final class CommendViewController: UIViewController {
     
@@ -17,13 +18,14 @@ final class CommendViewController: UIViewController {
     }()
     
     private let mainView = CommendView()
-    private let apiManager = APIManager.shared
+    private let viewModel = CommendViewModel()
+    private var disposeBag = DisposeBag()
     private var data: SearchApp? {
         didSet {
             mainView.commendTableView.reloadData()
         }
     }
-    
+
     override func loadView() {
         super.loadView()
         self.view = mainView
@@ -33,23 +35,27 @@ final class CommendViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         navigationItem.title = "검색"
-        searchController.searchBar.delegate = self
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         navigationController?.navigationBar.prefersLargeTitles = true
-
+        
         mainView.commendTableView.delegate = self
         mainView.commendTableView.dataSource = self
         mainView.commendTableView.register(CommendTableViewCell.self, forCellReuseIdentifier: CommendTableViewCell.identifier )
         mainView.commendTableView.rowHeight = 70
-        dataSetting()
-       
-    }
-    
-    private func dataSetting() {
-        apiManager.requestAPI(keyWord: "추천앱", limit: 12, completion: { data in
-            self.data = data
-        })
+        
+        let input = CommendViewModel.input(searchButtonClicked: searchController.searchBar.rx.searchButtonClicked)
+        let output = viewModel.translation(input: input)
+        
+        data = output.data
+        
+        output.searchButtonClicked.subscribe(with: self) { owner, value in
+            guard let text = owner.searchController.searchBar.text else { return }
+            
+            let vc = UINavigationController(rootViewController: SearchViewController(text: text))
+            vc.modalPresentationStyle = .overFullScreen
+            owner.present(vc, animated: false)
+        }.disposed(by: disposeBag)
     }
 }
 
@@ -105,16 +111,5 @@ extension CommendViewController: UITableViewDelegate, UITableViewDataSource {
         guard let data else { return }
         let vc = DetailViewController(trackId: data.results[indexPath.item].trackId)
         navigationController?.pushViewController(vc, animated: true)
-    }
-}
-
-extension CommendViewController: UISearchBarDelegate {
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let text = searchBar.text else { return }
-        
-        let vc = UINavigationController(rootViewController: SearchViewController(text: text)) 
-        vc.modalPresentationStyle = .overFullScreen
-        present(vc, animated: false)
-        searchController.isActive = false
     }
 }

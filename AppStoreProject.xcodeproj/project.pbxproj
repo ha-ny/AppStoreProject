@@ -28,6 +28,7 @@
 		3F9D99452AFFD97B00215B19 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9D99442AFFD97B00215B19 /* UIView+Extension.swift */; };
 		3F9D99482B00EF9D00215B19 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9D99472B00EF9D00215B19 /* DetailViewController.swift */; };
 		3F9D994A2B00EFA700215B19 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9D99492B00EFA700215B19 /* DetailView.swift */; };
+		3FFB2E782B02598300DAA3FD /* CommendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB2E772B02598300DAA3FD /* CommendViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		3F9D99442AFFD97B00215B19 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		3F9D99472B00EF9D00215B19 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		3F9D99492B00EFA700215B19 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		3FFB2E772B02598300DAA3FD /* CommendViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommendViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 				3F3448362AFBA6B000DAA904 /* CommendView.swift */,
 				3F3448442AFCC4A800DAA904 /* CommendTableViewCell.swift */,
 				3F3448132AFBA4C700DAA904 /* CommendViewController.swift */,
+				3FFB2E772B02598300DAA3FD /* CommendViewModel.swift */,
 			);
 			path = CommendView;
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 				3F3448102AFBA4C700DAA904 /* AppDelegate.swift in Sources */,
 				3F3448122AFBA4C700DAA904 /* SceneDelegate.swift in Sources */,
 				3F3448482AFCCBF500DAA904 /* APIManager.swift in Sources */,
+				3FFB2E782B02598300DAA3FD /* CommendViewModel.swift in Sources */,
 				3F9D994A2B00EFA700215B19 /* DetailView.swift in Sources */,
 				3F9D99482B00EF9D00215B19 /* DetailViewController.swift in Sources */,
 			);
@@ -327,7 +331,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -381,7 +385,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -405,7 +409,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -436,7 +440,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
