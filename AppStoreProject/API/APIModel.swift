@@ -24,5 +24,6 @@ struct Appdata: Codable {
     let averageUserRating: Double // 평균 평점
     let artworkUrl512: String // 아이콘
     let languageCodesISO2A: [String] // 언어
-    let releaseNotes: String //앱 설명
+    let version: String //버전
+    let releaseNotes: String //신규 버전 정보
 }
