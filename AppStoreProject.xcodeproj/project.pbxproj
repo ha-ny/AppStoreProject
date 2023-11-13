@@ -25,8 +25,9 @@
 		3F9D99382AFD05BC00215B19 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 3F9D99372AFD05BC00215B19 /* Alamofire */; };
 		3F9D993A2AFD09B300215B19 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9D99392AFD09B300215B19 /* SearchViewController.swift */; };
 		3F9D993C2AFD0B9200215B19 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9D993B2AFD0B9200215B19 /* SearchTableViewCell.swift */; };
-		3F9D99432AFFC88A00215B19 /* FoundCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9D99422AFFC88A00215B19 /* FoundCollectionViewCell.swift */; };
 		3F9D99452AFFD97B00215B19 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9D99442AFFD97B00215B19 /* UIView+Extension.swift */; };
+		3F9D99482B00EF9D00215B19 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9D99472B00EF9D00215B19 /* DetailViewController.swift */; };
+		3F9D994A2B00EFA700215B19 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9D99492B00EFA700215B19 /* DetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,8 +46,9 @@
 		3F9D99312AFCFC0300215B19 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		3F9D99392AFD09B300215B19 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		3F9D993B2AFD0B9200215B19 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
-		3F9D99422AFFC88A00215B19 /* FoundCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundCollectionViewCell.swift; sourceTree = "<group>"; };
 		3F9D99442AFFD97B00215B19 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		3F9D99472B00EF9D00215B19 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		3F9D99492B00EFA700215B19 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 				3F3448382AFBA6B600DAA904 /* Common */,
 				3F3448352AFBA6A300DAA904 /* CommendView */,
 				3F34484B2AFCF50F00DAA904 /* SearchView */,
+				3F9D99462B00EF8200215B19 /* DetailView */,
 				3F3448232AFBA52300DAA904 /* Delegate */,
 				3F3448182AFBA4C800DAA904 /* Assets.xcassets */,
 				3F34481A2AFBA4C800DAA904 /* LaunchScreen.storyboard */,
@@ -108,7 +111,6 @@
 		3F3448352AFBA6A300DAA904 /* CommendView */ = {
 			isa = PBXGroup;
 			children = (
-				3F9D99422AFFC88A00215B19 /* FoundCollectionViewCell.swift */,
 				3F3448362AFBA6B000DAA904 /* CommendView.swift */,
 				3F3448442AFCC4A800DAA904 /* CommendTableViewCell.swift */,
 				3F3448132AFBA4C700DAA904 /* CommendViewController.swift */,
@@ -150,6 +152,15 @@
 				3F9D99442AFFD97B00215B19 /* UIView+Extension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		3F9D99462B00EF8200215B19 /* DetailView */ = {
+			isa = PBXGroup;
+			children = (
+				3F9D99492B00EFA700215B19 /* DetailView.swift */,
+				3F9D99472B00EF9D00215B19 /* DetailViewController.swift */,
+			);
+			path = DetailView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -246,8 +257,9 @@
 				3F34484A2AFCD14200DAA904 /* APIModel.swift in Sources */,
 				3F3448102AFBA4C700DAA904 /* AppDelegate.swift in Sources */,
 				3F3448122AFBA4C700DAA904 /* SceneDelegate.swift in Sources */,
-				3F9D99432AFFC88A00215B19 /* FoundCollectionViewCell.swift in Sources */,
 				3F3448482AFCCBF500DAA904 /* APIManager.swift in Sources */,
+				3F9D994A2B00EFA700215B19 /* DetailView.swift in Sources */,
+				3F9D99482B00EF9D00215B19 /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
