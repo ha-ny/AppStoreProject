@@ -6,9 +6,8 @@
 //
 
 import UIKit
-import SnapKit
 
-final class CommendTableViewCell: UITableViewCell {
+final class CommendTableViewCell: BaseCell {
 
     var appImage = {
         let view = UIImageView()
@@ -51,12 +50,7 @@ final class CommendTableViewCell: UITableViewCell {
         return view
     }()
     
-    func cellSetting() {
-        setConfiguration()
-        setConstraints()
-    }
-
-    func setConfiguration() {
+    override func setConfiguration() {
         contentView.addSubview(appImage)
         contentView.addSubview(titleLabel)
         contentView.addSubview(descriptionLabel)
@@ -64,7 +58,7 @@ final class CommendTableViewCell: UITableViewCell {
         contentView.addSubview(lineView)
     }
     
-    func setConstraints() {
+    override func setConstraints() {
         appImage.snp.makeConstraints { make in
             make.top.bottom.equalTo(contentView).inset(7)
             make.left.equalTo(contentView).inset(22)

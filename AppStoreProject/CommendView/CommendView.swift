@@ -13,6 +13,7 @@ final class CommendView: BaseView {
         let view = UITableView(frame: .zero, style: .grouped)
         view.separatorStyle = .none
         view.backgroundColor = .clear
+        view.rowHeight = 70
         return view
      }()
 
