@@ -42,7 +42,7 @@ final class CommendViewController: UIViewController {
         super.loadView()
         self.view = mainView
     }
-     
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white

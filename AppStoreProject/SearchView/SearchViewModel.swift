@@ -29,11 +29,17 @@ class SearchViewModel {
     func translation(input: input) -> output {
         let output = output(searchButtonClicked: input.searchButtonClicked, cancelButtonClicked: input.cancelButtonClicked)
         
-        apiManager.requestAPI(keyWord: input.keyWord, limit: 20, completion: { value in
-            guard let value else { return }
-            output.data.onNext(value.results)
-        })
-        
+        apiRequest(keyword: input.keyWord) { data in
+            output.data.onNext(data)
+        }
+
         return output
+    }
+    
+    func apiRequest(keyword: String, data: @escaping ([Appdata]) -> ()) {
+        apiManager.requestAPI(keyWord: keyword, limit: 20, completion: { value in
+            guard let value else { return }
+            data(value.results)
+        })
     }
 }

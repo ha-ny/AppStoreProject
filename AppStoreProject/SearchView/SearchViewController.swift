@@ -22,6 +22,7 @@ final class SearchViewController: UIViewController {
     
     private let mainView = CommendView()
     private let viewModel = SearchViewModel()
+    private var textValue = BehaviorSubject(value: "")
     private var tableData = [Appdata]()
     private let disposeBag = DisposeBag()
 
@@ -58,12 +59,15 @@ final class SearchViewController: UIViewController {
         let input = SearchViewModel.input(searchButtonClicked: searchController.searchBar.rx.searchButtonClicked, cancelButtonClicked: searchController.searchBar.rx.cancelButtonClicked, keyWord: text)
         let output = viewModel.translation(input: input)
         
+        textValue.subscribe(with: self) { owner, value in
+            owner.viewModel.apiRequest(keyword: value) { data in
+                output.data.onNext(data)
+            }
+        }.disposed(by: disposeBag)
+        
         output.searchButtonClicked.subscribe(with: self) { owner, value in
-                guard let text = owner.searchController.searchBar.text else { return }
-
-                let vc = UINavigationController(rootViewController: SearchViewController(text: text))
-            vc.modalPresentationStyle = .overFullScreen
-            owner.present(vc, animated: false)
+            guard let text = owner.searchController.searchBar.text else { return }
+            owner.textValue.onNext(text)
         }.disposed(by: disposeBag)
         
         output.cancelButtonClicked.subscribe(with: self) { owner, value in
