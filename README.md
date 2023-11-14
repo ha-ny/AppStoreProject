@@ -17,7 +17,7 @@
 최소 지원 버전: iOS 13<br>
 
 ### **기술**
-**Architecture :** `MVVM`<br>
+**Architecture :** `MVVM`<br>
 **UI :** `UIKit` `CodeBaseUI` `UIActivityViewController` `SnapKit`<br>
 **Etc :** `RXSwift` `RXCocoa` `RXDataSource` `URLSession` `Codable`<br>
 
