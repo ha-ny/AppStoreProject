@@ -13,12 +13,9 @@ extension UIImage {
         
         DispatchQueue.global().async {
             guard let data = try? Data(contentsOf: url) else { return completion(nil) }
+            guard let image = UIImage(data: data) else { return completion(nil) }
             
-            if let image = UIImage(data: data) {
-                return completion(image)
-            } else {
-                return completion(nil)
-            }
+            return completion(image)
         }
     }
 }

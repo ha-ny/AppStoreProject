@@ -17,17 +17,16 @@ final class APIManager {
         let term =  keyWord.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         let stringURL = "https://itunes.apple.com/search?term=\(term)&contry=KR&media=software&lang=ko&limit=\(limit)"
 
-        guard let url = URL(string: stringURL) else { return completion(nil) }
+        guard let url = URL(string: stringURL) else { return completion(nil)  }
 
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { (data, response, error) in
-            guard let data else { return completion(nil) }
+            guard let data else { return completion(nil)  }
 
             do {
                 let resultData = try JSONDecoder().decode(SearchApp.self, from: data)
                 completion(resultData)
-            } catch { }
+            } catch { return completion(nil)  }
         }
         task.resume()
     }
-
 }

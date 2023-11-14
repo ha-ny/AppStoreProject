@@ -74,7 +74,7 @@ final class SearchViewController: UIViewController {
             guard let self, let cell = mainView.commendTableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.identifier, for: indexPath) as? SearchTableViewCell else { return UITableViewCell() }
 
             UIImage().stringURLConversion(stringURL: item.artworkUrl512) { image in
-                DispatchQueue.main.async {
+                DispatchQueue.main.async { 
                     cell.appImage.image = image
                 }
             }

@@ -74,7 +74,8 @@ final class CommendViewController: UIViewController {
             guard let self, let cell = mainView.commendTableView.dequeueReusableCell(withIdentifier: CommendTableViewCell.identifier, for: indexPath) as? CommendTableViewCell else { return UITableViewCell() }
             
             UIImage().stringURLConversion(stringURL: item.artworkUrl512) { image in
-                DispatchQueue.main.async {
+                DispatchQueue.main.async { [weak self] in
+                   guard let self else { return }
                     cell.appImage.image = image
                 }
             }
