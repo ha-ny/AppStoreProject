@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class SearchTableViewCell: UITableViewCell {
+final class SearchTableViewCell: BaseCell {
 
     var appImage = {
         let view = UIImageView()
@@ -101,11 +101,6 @@ final class SearchTableViewCell: UITableViewCell {
         return view
     }()
     
-    func cellSetting() {
-        setConfiguration()
-        setConstraints()
-    }
-    
     func horizontalImageSetting() {
         previewImage02.isHidden = true
         previewImage03.isHidden = true
@@ -117,7 +112,7 @@ final class SearchTableViewCell: UITableViewCell {
         }
     }
     
-    func setConfiguration() {
+    override func setConfiguration() {
         contentView.addSubview(appImage)
         contentView.addSubview(titleLabel)
         contentView.addSubview(descriptionLabel)
@@ -132,7 +127,7 @@ final class SearchTableViewCell: UITableViewCell {
         preview.addSubview(previewImage03)
     }
     
-    func setConstraints() {
+    override func setConstraints() {
         appImage.snp.makeConstraints { make in
             make.top.equalTo(self).inset(7)
             make.left.equalTo(self).inset(22)
