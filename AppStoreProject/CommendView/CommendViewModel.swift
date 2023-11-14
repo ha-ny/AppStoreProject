@@ -19,18 +19,18 @@ class CommendViewModel {
     }
     
     struct output {
-        var data: SearchApp
+        var data = BehaviorSubject(value: [Appdata]())
         var searchButtonClicked: ControlEvent<Void>
     }
     
     func translation(input: input) -> output {
-        var data = SearchApp.init(resultCount: 0, results: [])
+        let output = output(searchButtonClicked: input.searchButtonClicked)
         
         apiManager.requestAPI(keyWord: "추천앱", limit: 12, completion: { value in
-            guard let value else { return }
-            data = value
-        })
-        
-        return output(data: data, searchButtonClicked: input.searchButtonClicked)
+                    guard let value else { return }
+                    output.data.onNext(value.results)
+                })
+
+        return output
     }
 }
