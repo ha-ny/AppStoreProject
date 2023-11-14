@@ -102,10 +102,14 @@ final class SearchTableViewCell: BaseCell {
     }()
     
     func horizontalImageSetting() {
-        previewImage02.isHidden = true
-        previewImage03.isHidden = true
-        
+
         previewImage01.snp.removeConstraints()
+        previewImage02.snp.removeConstraints()
+        previewImage03.snp.removeConstraints()
+        
+        previewImage02.removeFromSuperview()
+        previewImage03.removeFromSuperview()
+        
         previewImage01.snp.makeConstraints { make in
             make.top.equalTo(ratingLabel.snp.bottom).offset(8)
             make.horizontalEdges.bottom.equalTo(preview)
