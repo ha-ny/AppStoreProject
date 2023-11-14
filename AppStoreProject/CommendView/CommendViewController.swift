@@ -26,7 +26,7 @@ extension AppdataModel: SectionModelType {
 
 final class CommendViewController: UIViewController {
     
-    lazy var searchController = {
+    private lazy var searchController = {
         let view = UISearchController()
         view.searchBar.placeholder = "게임, 앱, 스토리 등"
         view.searchBar.setValue("취소", forKey: "cancelButtonText")
@@ -58,7 +58,7 @@ final class CommendViewController: UIViewController {
         bind()
     }
     
-    func bind() {
+    private func bind() {
         let input = CommendViewModel.input(searchButtonClicked: searchController.searchBar.rx.searchButtonClicked)
         let output = viewModel.translation(input: input)
         

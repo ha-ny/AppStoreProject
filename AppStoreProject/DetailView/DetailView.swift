@@ -191,9 +191,10 @@ class DetailView: BaseView {
         }
 
         shareButton.snp.makeConstraints { make in
-            make.top.equalTo(downLoadButton.snp.top)
+            make.top.equalTo(titleLabel.snp.bottom)
             make.trailing.equalTo(titleLabel.snp.trailing).inset(8)
-            make.height.equalTo(35)
+            make.width.equalTo(50)
+            make.size.equalTo(35)
         }
         
         lineViewTop.snp.makeConstraints { make in

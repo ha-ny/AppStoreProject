@@ -39,7 +39,7 @@ class DetailViewController: UIViewController {
         bind()
     }
     
-    func bind() {
+    private func bind() {
         let input = DetailViewModel.input(shareButtonTap: mainView.shareButton.rx.tap, keyWord: trackId)
         let output = viewModel.translation(input: input)
 
@@ -60,7 +60,7 @@ class DetailViewController: UIViewController {
         }.disposed(by: disposeBag)
     }
     
-    func viewSetting() {
+    private func viewSetting() {
         guard let data else { return }
 
         UIImage().stringURLConversion(stringURL: data.artworkUrl512) { image in

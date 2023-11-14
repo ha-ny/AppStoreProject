@@ -52,7 +52,7 @@ final class SearchViewController: UIViewController {
         bind()
     }
 
-    func bind() {
+    private func bind() {
         guard let text = searchController.searchBar.text else { return }
         
         let input = SearchViewModel.input(searchButtonClicked: searchController.searchBar.rx.searchButtonClicked, cancelButtonClicked: searchController.searchBar.rx.cancelButtonClicked, keyWord: text)
