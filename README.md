@@ -27,7 +27,9 @@
 - `MVVM` : 구조화된 아키텍처를 통한 코드의 가독성 및 유지 보수성 개선
 - `Extension`을 통한 작업 분리: `DispatchQueue`를 사용한 이미지 URL 비동기 다운로드
 - `URLSession` 와 `Codable` 프로토콜을 이용한 네트워크 요청 및 데이터 디코딩
-- `UIActivityViewController` 를 활용한 Url 공유<br>
+-  API 파라미터를 활용한 데이터 검색 및 필터링
+- `UIActivityViewController` 를 활용한 Url 공유
+- SnapKit 을 통한 CodeBaseUI 구현<br>
 
 ### **트러블 슈팅**
 **1. SnapKit 제약조건 충돌**
